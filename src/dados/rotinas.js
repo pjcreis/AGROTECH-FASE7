@@ -1,7 +1,3 @@
-// Receitas de manejo por cultura.
-// Nesta versão três culturas têm receita própria. As demais usam a rotina
-// genérica, e vão ganhando a sua receita conforme o sistema evolui.
-
 import RotinaCultura from '../models/RotinaCultura.js'
 
 const alface = new RotinaCultura(
