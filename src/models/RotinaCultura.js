@@ -1,10 +1,3 @@
-// Classe RotinaCultura do diagrama de classes.
-// Guarda a receita de manejo de uma cultura: quanto de água e de adubo
-// por muda, as atividades que se repetem e as etapas do ciclo.
-// A partir dessa receita ela monta o passo a passo de um plantio, com
-// as repetições já expandidas em ocorrências numeradas e as doses
-// calculadas pela quantidade de mudas.
-
 import { Rega, Adubacao, Inspecao, Personalizada } from './Tarefa.js'
 
 class RotinaCultura {
@@ -25,7 +18,6 @@ class RotinaCultura {
         return Math.round(this.gramasAduboPorMuda * quantidadeMudas)
     }
 
-    // Cria uma atividade a partir de uma linha da receita.
     criarTarefa(id, linha, dia, ocorrencia, total, quantidadeMudas) {
         if (linha.tipo === 'rega') {
             return new Rega(id, linha.descricao, dia, ocorrencia, total, this.volumePorRega(quantidadeMudas))
@@ -40,8 +32,6 @@ class RotinaCultura {
         return new Personalizada(id, linha.descricao, dia, ocorrencia, total, linha.observacao || '')
     }
 
-    // Monta o passo a passo completo do plantio, do dia 1 até a colheita.
-    // As atividades que se repetem viram várias ocorrências numeradas.
     gerarTarefas(plantio, idBase) {
         const ciclo = plantio.cultura.cicloDias
         const mudas = plantio.quantidadeMudas
@@ -62,7 +52,6 @@ class RotinaCultura {
             contador = contador + 1
         })
 
-        // O passo a passo é lido em ordem de dia.
         tarefas.sort(function (a, b) {
             return a.diaPrevisto - b.diaPrevisto
         })
@@ -70,7 +59,6 @@ class RotinaCultura {
         return tarefas
     }
 
-    // Rotina usada enquanto uma cultura ainda não tem receita própria.
     static generica(cicloDias) {
         const meio = Math.round(cicloDias / 2)
         const fim = cicloDias - 10
