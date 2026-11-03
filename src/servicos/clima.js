@@ -13,8 +13,6 @@ const ENDERECO_REVERSO = 'https://api.bigdatacloud.net/data/reverse-geocode-clie
 
 // ───────── Localização ─────────
 
-// Pergunta a posição ao navegador. Devolve null se o usuário recusar,
-// se o recurso não existir ou se demorar demais.
 function posicaoDoNavegador() {
     return new Promise(function (resolver) {
         if (!navigator.geolocation) {
