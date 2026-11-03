@@ -1,7 +1,3 @@
-// Classe MicroFazenda do diagrama de classes.
-// É a raiz do modelo: contém os Plantios e as Colheitas (composição) e
-// concentra as operações do sistema.
-
 import Plantio from './Plantio.js'
 import Colheita from './Colheita.js'
 import { Rega, Adubacao, Inspecao, Personalizada } from './Tarefa.js'
@@ -15,24 +11,17 @@ class MicroFazenda {
         this.proximoIdTarefa = proximoIdTarefa || 9000
     }
 
-    // Estado inicial usado na demonstração, com dois plantios em fases
-    // diferentes. Recebe o catálogo para encontrar as culturas.
     static criarComExemplos(catalogo) {
         const fazenda = new MicroFazenda([], [], 1, 0)
         fazenda.adicionarPlantio(catalogo.buscar('alface'), 12, 'Varanda', 53)
         fazenda.adicionarPlantio(catalogo.buscar('rucula'), 8, 'Quintal', 28)
 
-        // O passo a passo já vivido aparece concluído, para a tela começar
-        // limpa. A alface fica com uma única atividade em atraso, que serve
-        // de exemplo de pendência.
         fazenda.plantios[0].concluirHistorico(1)
         fazenda.plantios[1].concluirHistorico(0)
 
         return fazenda
     }
 
-    // O React só redesenha a tela quando recebe um novo objeto, por isso
-    // cada operação devolve uma cópia da micro-fazenda.
     clonar() {
         return new MicroFazenda(
             this.plantios,
@@ -43,7 +32,6 @@ class MicroFazenda {
         )
     }
 
-    // Recebe a própria cultura, que vem do catálogo.
     adicionarPlantio(cultura, quantidadeMudas, local, diasPassados) {
         if (!cultura) {
             return false
@@ -96,11 +84,6 @@ class MicroFazenda {
         }).length
     }
 
-    // Cria a atividade da subclasse correspondente ao tipo escolhido.
-    // É aqui que a herança aparece: o resto do sistema trata todas como
-    // Tarefa, sem precisar saber qual subclasse é.
-    // Quando repetirCada é informado, a atividade é expandida em
-    // ocorrências numeradas até o fim do ciclo.
     adicionarTarefa(idPlantio, tipo, descricao, detalhe, diaInicial, repetirCada) {
         const plantio = this.buscarPlantio(idPlantio)
         if (!plantio) {
