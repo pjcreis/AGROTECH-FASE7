@@ -1,8 +1,3 @@
-// Classe Cultura do diagrama de classes.
-// Representa uma cultura do catálogo e contém a sua rotina de manejo.
-// A cultura existe de forma independente do plantio, por isso a ligação
-// entre as duas é uma associação e não uma composição.
-
 class Cultura {
     constructor(id, nome, icone, cicloDias, sol, agua, dificuldade, dica, rotina) {
         this.id = id
