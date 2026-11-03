@@ -19,8 +19,6 @@ function App() {
     const [catalogo, setCatalogo] = useState(function () {
         return Catalogo.criarPadrao()
     })
-    // O mesmo catálogo alimenta os plantios de demonstração, para que as
-    // culturas exibidas sejam exatamente as do catálogo em uso.
     const [fazenda, setFazenda] = useState(function () {
         return MicroFazenda.criarComExemplos(catalogo)
     })
