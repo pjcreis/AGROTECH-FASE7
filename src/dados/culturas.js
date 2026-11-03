@@ -1,9 +1,3 @@
-// Culturas que o sistema traz de fábrica.
-// Cada item é uma instância da classe Cultura e recebe a sua rotina de
-// manejo. As culturas sem receita própria usam a rotina genérica.
-// A lista é criada por uma função porque o catálogo passou a ser um
-// objeto com estado, que o usuário pode alimentar com novas culturas.
-
 import Cultura from '../models/Cultura.js'
 import { buscarRotina } from './rotinas.js'
 
