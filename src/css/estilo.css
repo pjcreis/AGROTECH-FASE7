@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'DM Sans', Arial, sans-serif;
+    color: #1a1a1a;
+}
+
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+}
+
+.toast-custom {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+    pointer-events: auto;
+}
