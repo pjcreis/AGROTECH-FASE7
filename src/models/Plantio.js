@@ -1,7 +1,3 @@
-// Classe Plantio do diagrama de classes.
-// Associação: guarda uma referência a uma Cultura, que existe por conta própria.
-// Composição: contém o seu passo a passo de manejo, que deixa de existir com ele.
-
 class Plantio {
     constructor(id, cultura, quantidadeMudas, local, diasPassados) {
         this.id = id
@@ -13,8 +9,6 @@ class Plantio {
         this.criarTarefasPadrao()
     }
 
-    // O passo a passo vem da rotina da cultura e já sai dimensionado
-    // pela quantidade de mudas deste plantio.
     criarTarefasPadrao() {
         this.tarefas = this.cultura.rotina.gerarTarefas(this, this.id * 1000)
     }
@@ -49,7 +43,6 @@ class Plantio {
         })
     }
 
-    // Atividades previstas para os próximos dias, usadas no resumo.
     proximasTarefas(quantidade) {
         const dias = this.diasPassados
         const futuras = this.tarefas.filter(function (t) {
@@ -58,7 +51,6 @@ class Plantio {
         return futuras.slice(0, quantidade)
     }
 
-    // Agrupa o passo a passo por semana do ciclo.
     tarefasPorSemana() {
         const grupos = []
         this.tarefas.forEach(function (t) {
@@ -82,8 +74,7 @@ class Plantio {
         return semana < 1 ? 1 : semana
     }
 
-    // Marca como feito tudo o que já passou, deixando em aberto as
-    // atividades mais recentes indicadas em quantasDeixarAbertas.
+
     concluirHistorico(quantasDeixarAbertas) {
         const dias = this.diasPassados
         const passadas = this.tarefas.filter(function (t) {
