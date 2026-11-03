@@ -12,13 +12,6 @@ import {
     formatarHora
 } from '../servicos/clima.js'
 
-// Faixa meteorológica compacta.
-// Este componente usa styled-components, conteúdo da Fase 7, com o
-// estilo escrito junto do componente.
-//
-// A informação é apresentada sem recomendação de manejo, porque o
-// cultivo pode estar em ambiente coberto.
-
 const Caixa = styled.section`
     background: #ffffff;
     border: 1px solid #e3e7e0;
@@ -98,9 +91,6 @@ const BotaoTexto = styled.button`
     }
 `
 
-// A faixa de indicadores desliza devagar, no formato usado por
-// painéis de cotação. A animação para quando o ponteiro está sobre
-// ela e também para quem pediu menos movimento no sistema.
 const rolar = keyframes`
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
@@ -267,8 +257,6 @@ const Mensagem = styled.p`
     padding: 14px 18px;
 `
 
-// Qualquer campo pode vir vazio da API. Estas funções evitam que isso
-// quebre a tela, mostrando um traço no lugar do número.
 function inteiro(valor) {
     if (valor === null || valor === undefined || Number.isNaN(valor)) {
         return '—'
@@ -293,7 +281,6 @@ function PainelClima() {
     const [termo, setTermo] = useState('')
     const [opcoes, setOpcoes] = useState([])
 
-    // Ao montar o componente, descobre a localização e busca a previsão.
     useEffect(function () {
         let ativo = true
 
@@ -418,7 +405,6 @@ function PainelClima() {
         { rotulo: 'Sol', valor: formatarHora(hoje.nascerSol), unidade: `às ${formatarHora(hoje.porSol)}` }
     ]
 
-    // A lista é repetida para que o deslize volte ao início sem corte.
     const faixaDupla = indicadores.concat(indicadores)
 
     return (
