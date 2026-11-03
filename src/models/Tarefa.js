@@ -1,12 +1,3 @@
-// Classe Tarefa e suas subclasses, conforme o diagrama de classes.
-// Tarefa é a classe base de toda atividade da rotina de manejo.
-// Rega, Adubacao, Inspecao e Personalizada herdam dela e cada uma
-// sobrescreve detalhar(), que é o ponto de polimorfismo do projeto.
-//
-// Toda tarefa acontece em um dia do ciclo. As atividades que se repetem
-// são expandidas em ocorrências numeradas na hora de montar a rotina,
-// por isso a tarefa também guarda a sua posição na sequência.
-
 class Tarefa {
     constructor(id, descricao, diaPrevisto, ocorrencia, totalOcorrencias) {
         this.id = id
@@ -33,19 +24,14 @@ class Tarefa {
         return this.concluida === false
     }
 
-    // Fica em atraso quando o ciclo já passou do dia previsto e a
-    // atividade ainda não foi marcada como feita.
     estaAtrasada(diasPassados) {
         return this.estaPendente() && diasPassados >= this.diaPrevisto
     }
 
-    // Semana do ciclo em que a atividade acontece, usada para agrupar
-    // o passo a passo na tela.
     semana() {
         return Math.ceil(this.diaPrevisto / 7)
     }
 
-    // Numeração da atividade quando ela se repete ao longo do ciclo.
     rotuloOcorrencia() {
         if (this.totalOcorrencias > 1) {
             return `${this.tipo()} ${this.ocorrencia} de ${this.totalOcorrencias}`
@@ -53,7 +39,6 @@ class Tarefa {
         return this.tipo()
     }
 
-    // Cada subclasse sobrescreve este método.
     detalhar() {
         return `No dia ${this.diaPrevisto} do ciclo.`
     }
@@ -115,9 +100,6 @@ class Inspecao extends Tarefa {
     }
 }
 
-// Atividade livre, sem categoria fixa. Usada pelas receitas para o que
-// não é rega, adubação nem inspeção, como o desbaste da cenoura, e
-// também pelo usuário, para registrar o que quiser.
 class Personalizada extends Tarefa {
     constructor(id, descricao, diaPrevisto, ocorrencia, totalOcorrencias, anotacao) {
         super(id, descricao, diaPrevisto, ocorrencia, totalOcorrencias)
