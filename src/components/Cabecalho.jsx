@@ -11,7 +11,12 @@ function Cabecalho() {
             <div className="container">
                 <Link className="navbar-brand" to="/">
                     <span className="vf-marca"><Icone nome="broto" tamanho={20} /></span>
-                    <span>Sistema Orquestrador de Micro-Fazendas <span>Verticais</span></span>
+                    <span className="vf-marca-longa d-none d-lg-inline">
+                        Sistema Orquestrador de Micro-Fazendas <span>Verticais</span>
+                    </span>
+                    <span className="vf-marca-curta d-lg-none">
+                        Micro-Fazendas <span>Verticais</span>
+                    </span>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menu">
                     <span className="navbar-toggler-icon"></span>

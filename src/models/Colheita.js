@@ -1,3 +1,6 @@
+// Classe Colheita do diagrama de classes.
+// Guarda o registro de um ciclo produtivo encerrado.
+
 class Colheita {
     constructor(id, culturaNome, quantidade, local, diaRegistro) {
         this.id = id

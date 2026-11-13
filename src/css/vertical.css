@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&display=swap');
 
+/* Tudo vive sob .vf: Painel, Manejo e Guia. As outras páginas não mudam. */
 .vf {
     --vf-bg: #f4f8f5;
     --vf-surface: #ffffff;
@@ -430,3 +431,21 @@ footer p { opacity: 1; }
 .vf .is-invalid { border-color: var(--vf-atraso); }
 .vf .invalid-feedback { color: var(--vf-atraso); font-size: 13px; }
 .vf-ok { background: var(--vf-ok-bg); color: var(--vf-folha-esc); border-radius: 14px; padding: 16px 18px; margin-top: 20px; }
+
+/* ── Ajustes para telas pequenas ── */
+.navbar .navbar-brand { min-width: 0; }
+.navbar .navbar-brand > span:not(.vf-marca) {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+    .navbar .navbar-brand { font-size: 16px; gap: 8px; }
+    .vf-marca { width: 30px; height: 30px; }
+}
+
+@media (max-width: 420px) {
+    .navbar .navbar-brand { font-size: 14.5px; }
+}

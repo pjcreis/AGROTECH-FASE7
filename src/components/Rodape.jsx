@@ -1,3 +1,4 @@
+// Rodapé reutilizado em toda a aplicação.
 function Rodape() {
     return (
         <footer>

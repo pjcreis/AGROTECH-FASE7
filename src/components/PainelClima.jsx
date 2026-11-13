@@ -12,6 +12,13 @@ import {
     formatarHora
 } from '../servicos/clima.js'
 
+// Faixa meteorológica compacta.
+// Este componente usa styled-components, conteúdo da Fase 7, com o
+// estilo escrito junto do componente.
+//
+// A informação é apresentada sem recomendação de manejo, porque o
+// cultivo pode estar em ambiente coberto.
+
 const Caixa = styled.section`
     background: #ffffff;
     border: 1px solid #e3e7e0;
@@ -91,6 +98,9 @@ const BotaoTexto = styled.button`
     }
 `
 
+// A faixa de indicadores desliza devagar, no formato usado por
+// painéis de cotação. A animação para quando o ponteiro está sobre
+// ela e também para quem pediu menos movimento no sistema.
 const rolar = keyframes`
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
@@ -101,8 +111,19 @@ const Faixa = styled.div`
     background: #fafbf9;
     overflow: hidden;
     padding: 8px 0;
-    mask-image: linear-gradient(90deg, transparent, #000 36px, #000 calc(100% - 36px), transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 36px, #000 calc(100% - 36px), transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+
+    /* Sem a animação, a faixa pode ser arrastada com o dedo. */
+    @media (prefers-reduced-motion: reduce) {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &::-webkit-scrollbar { display: none; }
+    }
 `
 
 const Trilho = styled.div`
@@ -116,10 +137,22 @@ const Trilho = styled.div`
 
     @media (prefers-reduced-motion: reduce) {
         animation: none;
-        width: 100%;
-        flex-wrap: wrap;
-        justify-content: center;
     }
+`
+
+// A segunda cópia da lista existe só para o deslize voltar ao início
+// sem corte. Quando a animação não roda, ela é escondida para não
+// repetir a informação na tela.
+const Copia = styled.div`
+    display: flex;
+
+    @media (prefers-reduced-motion: reduce) {
+        display: none;
+    }
+`
+
+const Grupo = styled.div`
+    display: flex;
 `
 
 const Indicador = styled.span`
@@ -128,6 +161,11 @@ const Indicador = styled.span`
     gap: 6px;
     padding: 0 16px;
     font-size: 12.5px;
+
+    @media (max-width: 576px) {
+        padding: 0 12px;
+        font-size: 12px;
+    }
     white-space: nowrap;
     border-right: 1px solid #e6eae3;
 
@@ -257,6 +295,8 @@ const Mensagem = styled.p`
     padding: 14px 18px;
 `
 
+// Qualquer campo pode vir vazio da API. Estas funções evitam que isso
+// quebre a tela, mostrando um traço no lugar do número.
 function inteiro(valor) {
     if (valor === null || valor === undefined || Number.isNaN(valor)) {
         return '—'
@@ -281,6 +321,7 @@ function PainelClima() {
     const [termo, setTermo] = useState('')
     const [opcoes, setOpcoes] = useState([])
 
+    // Ao montar o componente, descobre a localização e busca a previsão.
     useEffect(function () {
         let ativo = true
 
@@ -405,7 +446,6 @@ function PainelClima() {
         { rotulo: 'Sol', valor: formatarHora(hoje.nascerSol), unidade: `às ${formatarHora(hoje.porSol)}` }
     ]
 
-    const faixaDupla = indicadores.concat(indicadores)
 
     return (
         <Caixa>
@@ -441,15 +481,29 @@ function PainelClima() {
 
             <Faixa aria-label="Indicadores meteorológicos">
                 <Trilho>
-                    {faixaDupla.map(function (ind, indice) {
-                        return (
-                            <Indicador key={`${ind.rotulo}-${indice}`} aria-hidden={indice >= indicadores.length}>
-                                <b>{ind.rotulo}</b>
-                                <span>{ind.valor}</span>
-                                <small>{ind.unidade}</small>
-                            </Indicador>
-                        )
-                    })}
+                    <Grupo>
+                        {indicadores.map(function (ind) {
+                            return (
+                                <Indicador key={ind.rotulo}>
+                                    <b>{ind.rotulo}</b>
+                                    <span>{ind.valor}</span>
+                                    <small>{ind.unidade}</small>
+                                </Indicador>
+                            )
+                        })}
+                    </Grupo>
+
+                    <Copia aria-hidden="true">
+                        {indicadores.map(function (ind) {
+                            return (
+                                <Indicador key={`copia-${ind.rotulo}`}>
+                                    <b>{ind.rotulo}</b>
+                                    <span>{ind.valor}</span>
+                                    <small>{ind.unidade}</small>
+                                </Indicador>
+                            )
+                        })}
+                    </Copia>
                 </Trilho>
             </Faixa>
 
