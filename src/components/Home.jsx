@@ -23,12 +23,12 @@ function Home() {
                                     que querem produzir alimentos frescos em pequenos espaços, com mais controle e previsibilidade.
                                 </p>
                                 <a
-                                    href="https://youtu.be/4PPs-TOZlXM"
+                                    href="https://youtu.be/ZpQH3AIgHHc"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn vf-btn"
                                 >
-                                    Assistir ao pitch da Fase 6
+                                    Assistir ao pitch da Fase 7
                                     <span className="visually-hidden"> (abre em nova aba)</span>
                                 </a>
                             </div>
