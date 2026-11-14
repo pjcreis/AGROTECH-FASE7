@@ -1,6 +1,6 @@
-# Sistema Orquestrador de Micro-Fazendas Verticais (Fase 6)
+# Sistema Orquestrador de Micro-Fazendas Verticais (Fase 7)
 
-Versão da Fase 6, construída com React e Vite a partir do projeto da Fase 5.
+Versão da Fase 7, construída com React e Vite a partir do projeto da Fase 6.
 
 ## Como executar
 
@@ -49,16 +49,6 @@ informações são apresentadas sem recomendação de manejo.
 Os dados vêm das APIs públicas do Open-Meteo, consumidas com fetch. A API é
 gratuita, não exige chave e permite chamadas direto do navegador. O serviço fica
 em `src/servicos/clima.js`, separado da tela.
-
-## Nova funcionalidade da Fase 6: Rotinas de manejo
-
-A página Manejo mostra um passo a passo do cultivo, pensado para quem não entende
-de plantio. As atividades que se repetem são expandidas em ocorrências numeradas,
-como Rega 26 de 30, e ficam na mesma lista das atividades de uma vez só, como o
-desbaste da cenoura no dia 20. Tudo aparece em ordem de dia e agrupado por semana.
-
-As doses são calculadas pela quantidade de mudas. Alface, rúcula e cenoura têm
-receita própria, e as demais culturas usam a rotina básica.
 
 ## Conceitos de React aplicados
 
